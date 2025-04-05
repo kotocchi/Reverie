@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome</title>
+  <style>
+    body {
+      background: #000;
+      color: #0f0;
+      font-family: monospace;
+      text-align: center;
+      padding-top: 20%;
+    }
+    #output {
+      font-size: 2em;
+      letter-spacing: 0.1em;
+    }
+    input, button {
+      padding: 10px;
+      background: #111;
+      color: #0f0;
+      border: 1px solid #0f0;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+<div id="login">
+  <p>Enter Password:</p>
+  <input type="password" id="pass" />
+  <button onclick="check()">Enter</button>
+  <p id="error" style="color:red;"></p>
+</div>
+
+<div id="reveal" style="display:none;">
+  <div id="output">_ _ _ _ _</div>
+</div>
+
+<script>
+  function check() {
+    const input = document.getElementById('pass').value;
+    if (input.toLowerCase() === "cipit") {
+      document.getElementById('login').style.display = 'none';
+      document.getElementById('reveal').style.display = 'block';
+      bellaReveal();
+    } else {
+      document.getElementById('error').innerText = "ACCESS DENIED.";
+    }
+  }
+
+  function bellaReveal() {
+    const codes = [66, 101, 108, 108, 97];
+    let i = 0;
+    const reveal = () => {
+      if (i < codes.length) {
+        let current = document.getElementById('output').innerText.split(' ');
+        current[i] = String.fromCharCode(codes[i]);
+        document.getElementById('output').innerText = current.join(' ');
+        i++;
+        setTimeout(reveal, 400);
+      }
+    };
+    reveal();
+  }
+</script>
+
+</body>
+</html>
